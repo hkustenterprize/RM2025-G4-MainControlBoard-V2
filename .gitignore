@@ -8,3 +8,4 @@ RM2025_G473_MCB_StdExtend/fabrication-toolkit-options.json
 /RM2025_G473_MCB_StdExtend/production/backups
 /RM2025_G473_MCB_StdExtend/RM2025_G473_MCB_StdExtend-backups
 *.kicad_sch-bak
+*.lck
