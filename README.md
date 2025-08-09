@@ -14,6 +14,10 @@
 
 ## 文件内容
 
+核心板：[点击在线预览](https://kicanvas.org/?github=https%3A%2F%2Fgithub.com%2Fhkustenterprize%2FRM2025-G4-MainControlBoard-V2%2Ftree%2Fmain%2FRM2025_G473_MCB)
+
+扩展板：[点击在线预览](https://kicanvas.org/?github=https%3A%2F%2Fgithub.com%2Fhkustenterprize%2FRM2025-G4-MainControlBoard-V2%2Ftree%2Fmain%2FRM2025_G473_MCB_StdExtend)
+
 ~~~
 RM2025-G4-MainControlBoard-V2
 ├── image
@@ -61,3 +65,84 @@ xxx
 - 扩展板重新 layout，增加了专用于舵轮分电板的 7pin 接口
 - 扩展板增加四个 WS2812 LED用于指示状态，将蜂鸣器移至核心板上
 
+## 电源网络
+
+
+## 外设引脚分配
+
+
+
+
+| <u>CAN</u> (SIT1042T/3) | CAN_TX | CAN_RX |
+| ---- | ---- | ---- |
+| **CAN1**   | PD1   | PD0   |
+| **CAN2**   | PB6   | PB5  |
+| **CAN3**   | PB4   | PB3   |
+
+
+| <u>RS485</u> (SN75176AD) | TX <sup>1</sup> | RX <sup>1</sup> | DE <sup>2</sup>|
+| ---- | ---- | ---- |---- |
+| **RS485 (UART4)**   | PC10   | PC11  | PA15 |
+
+
+1. 不使用RS485功能时 UART4 可作为 独立UART 使用。
+2. 不使用RS485功能时 **DE引脚** 需要配置为 **高电平**，需要确保 **RS485接口** 没有连接。
+
+
+| <u>TTL</u> (CH343P) | TX | RX |
+| ---- | ---- | ---- |
+| **TTL1 (UART2A)**   | PA2  | PA3  |
+| **TTL2 (UART3A)**   | PD8  | PD9  |
+
+
+- 两个TTL芯片均连有状态指示灯，在接口两侧。
+- CH343P 接入USB线 (VBUS有供电) 后自动使能。
+
+
+| <u>IMU</u> (ICM-42688P) | SCLK | MISO | MOSI | CS | DRDY |
+| ---- | ---- | ---- | ---- | ---- | ---- |
+| **IMU (SPI2)**   | PB13  | PB14  | PB15 | PB12 | PB10 |
+
+
+- **IMU加热**开关由 **PA4** 引脚控制，可以使用 **TIM3_CH2** 或 **GPIO SET/RESET**。
+- IMU朝向已在板背面标明
+
+
+| <u>DR16/i10B</u> | RX <sup>1 2</sup> |
+| ---- | ---- |
+| **RX1 (UART1C)**   | PA10 |
+| **RX2 (UART3C)**   | PB11 |
+
+
+1. 两个引脚硬件上连接在一起，可使用任意一个引脚 (对应的串口) 读取接受机数据。
+2. 使用一个引脚时，**另外一个引脚一定要悬空**。
+
+
+| <u>FLASH</u> (W25N01GVZEIG) | CS | CLK | IO0 | IO1 | IO2 | IO3 |
+| ---- | ---- | ---- | ---- | ---- | ---- | ---- |
+| **FLASH (QSPI1)**   | PE11  | PE10  | PB1 | PE13 | PE14 | PA6 |
+
+
+| <u>其他外设</u>  | Pin |
+| ---- | ---- |
+| **VIN 24V ADC**   | PA8  |
+| **5V ADC**   | PA9  |
+| **Buzzer**   | PE3  |
+| **LED**   | PC13  |
+| **Button**   | PC15  |
+
+## 串口分配
+
+
+|       | TX | RX | DE | 功能 |
+| ---- | ---- | ---- | ---- | ---- |
+| **UART1A**   | PC4  | PC5  |-      | 裁判系统/图传 |
+| **UART1B**   | PE0  | PE1  |- | 通用串口  |
+| **UART1C**   | -  | PA10  |-  | 接收机  |
+| **UART2A**   | PA2  | PA3  |-  | MiniPC1 TTL |
+| **UART2B**   | PD5  | PD6  |-  | 通用串口  |
+| **UART3A**   | PD8  | PD9  |-  | MiniPC2 TTL |
+| **UART3B**   | PB9  | PE15  |-  | 通用串口  |
+| **UART3C**   | -  | PB11  |-  | 接收机  |
+| **UART4**   | PC10  | PC11  | PA15 | RS485/通用串口<sup>1</sup>  |
+| **UART5**   | PC12  | PD2  |-  | 裁判系统/图传  |
