@@ -1,3 +1,10 @@
 RM2025_G473_MCB_StdExtend/fp-info-cache
 *.kicad_prl
 RM2025_G473_MCB/fp-info-cache
+RM2025_G473_MCB/fabrication-toolkit-options.json
+/RM2025_G473_MCB/production/backups
+/RM2025_G473_MCB/RM2025_G473_MCB-backups
+RM2025_G473_MCB_StdExtend/fabrication-toolkit-options.json
+/RM2025_G473_MCB_StdExtend/production/backups
+/RM2025_G473_MCB_StdExtend/RM2025_G473_MCB_StdExtend-backups
+*.kicad_sch-bak
